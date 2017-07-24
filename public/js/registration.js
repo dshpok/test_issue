@@ -18,16 +18,26 @@ var Registration = function() { console.log('object create!!');
             newCustomer:$('#new_customer')
         }
     };
+    this. messages = {
+        email: {
+            required: "This field is required",
+                email: "Invalid Email Address",
+                remote: "Email address already in use. Please use other email."
+        }
+    };
 
     this.rules = {
         'email': {
             required: true,
             validationEmail: true,
+
             remote: {
-                url: '/auth/checkExistsUserForAjax/',
-                type: 'post',
+                url: "/auth/checkExistsUserForAjax/",
+                type: 'get',
+                dataType: 'json',
                 data: {
                     email: function () {
+                        console.log('email', self.body.input.email.val());
                         return self.body.input.email.val();
                     }
                 }
@@ -47,50 +57,43 @@ var Registration = function() { console.log('object create!!');
         return this.optional(element) || self.checkValidEmail(value);
     }, 'Please enter a valid email address');
 
-    //$.validator.addMethod('checkDate', function (value, element) {
-    //    var compareDate = (new Date($(element).val()).getFullYear() < (new Date().getFullYear() - minAge));
-    //    return this.optional(element) || compareDate;
-    //}, 'New user is too young!');
 
 
-    //this.body.form.newCustomer.validate({
-    //    ignore: [],
-    //    onkeyup: false,
-    //    onfocusout: function (element) {
-    //        $(element).valid();
-    //    },
-    //    onsubmit: function (element) {
-    //        console.log('SUBMIT', element);
-    //        $(element).valid();
-    //    },
-    //    rules: self.rules,
-    //    //messages : messages,
-    //    success: function (s, element) {
-    //        console.log('SUCCESS', element);
-    //        $(element).removeClass('error').parent().find('.help-block').remove();
-    //    },
-    //    errorPlacement: function (error, element) {
-    //        console.log('ERROR ', error);
-    //        $(element).removeClass('error').parent().find('.help-block').remove();
-    //
-    //        var name    = $(element).attr('name');
-    //        var pattern = '/(/[\[\]])/g';
-    //        name        = name.replace(pattern, '\\$1');
-    //        if (typeof error[0].innerText != 'undefined' && error[0].innerText != '') {
-    //            $(element)
-    //                .addClass('error')
-    //                .after('<span class="help-block">'
-    //                + '<strong>' + error[0].innerText + '</strong></span>');
-    //        }
-    //    }
-    //});
+    this.body.form.newCustomer.validate({
+       ignore: [],
+       onkeyup: false,
+       onfocusout: function (element) {
+           $(element).valid();
+       },
+       onsubmit: function (element) {
+           console.log('SUBMIT', element);
+           $(element).valid();
+       },
+       rules: self.rules,
+       messages : self.messages,
+       success: function (s, element) {
+           console.log('SUCCESS', element);
+           $(element).removeClass('error').parent().find('.help-block').remove();
+       },
+       errorPlacement: function (error, element) {
+           console.log('ERROR ', error);
+           $(element).removeClass('error').parent().find('.help-block').remove();
+
+           var name    = $(element).attr('name');
+           var pattern = '/(/[\[\]])/g';
+           name        = name.replace(pattern, '\\$1');
+           if (typeof error[0].innerText != 'undefined' && error[0].innerText != '') {
+               $(element)
+                   .addClass('error')
+                   .after('<span class="help-block">'
+                   + '<strong>' + error[0].innerText + '</strong></span>');
+           }
+       }
+    });
 
 
     this.body.button.registration.on('click', function (e) {
 
-        //var validator = self.body.form.newCustomer.validate();
-        //var errors = validator.errors();
-        //console.log('RERROR', errors, self.body.input.email.val());
         var email    = $.trim(self.body.input.email.val());
         var password = $.trim(self.body.input.password.val());
         var repeat    = $.trim(self.body.input.repeat.val());
@@ -101,11 +104,6 @@ var Registration = function() { console.log('object create!!');
             return;
         }
 
-        //e.preventDefault();
-        //e.stopPropagation();
-        //if(self.body.form.newCustomer.valid()) {
-        //    self.body.form.newCustomer.submit();
-        //}
     });
 
     self.body.button.close.on('click', function() {

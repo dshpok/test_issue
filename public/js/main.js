@@ -14,7 +14,7 @@ var Login = function () {
     };
 
     this.body.form.close.on('click', function() {
-        this.body.form.errorMessage
+        self.body.form.errorMessage
            .css({visibility: 'hidden'});
 
     });

@@ -39,7 +39,7 @@ class AuthController extends BaseController {
      * login the our users
      */
     public function login() {
-        //var_dump('login', $_POST);exit;
+
         $result = [];
         if(!empty($_POST['email']) && !empty($_POST['password'])) {
             $email    = UtilsController::clean($_POST['email']);
@@ -87,8 +87,6 @@ class AuthController extends BaseController {
         $info            = OrganizerModel::getAllUserSchedule($id);
         $userInfo['all'] = $info;
         BaseView::generate('userSchedulers.php', $userInfo);
-
-
     }
 
     public function registration() {
@@ -100,12 +98,12 @@ class AuthController extends BaseController {
             header('location:/auth/getRegistrationForm/');
             return;
         }
-       //clean our params
+
         $email      = trim($_POST['email']);
         $password   = trim($_POST['password']);
 
         //if exists user - return;
-        if($this->checkExistsUser() === false) {
+        if($this->checkExistsUser($email)) {
             return;
         }
 
@@ -128,40 +126,28 @@ class AuthController extends BaseController {
         BaseView::generate( 'registration.php');
     }
 
-    // true  - if exists user in DB(it is bad)
-    public function checkExistsUser() {
 
+    public function checkExistsUser($email) {
 
-        if(empty($_POST['email'])){
+        if(empty($email)){
             return;
         }
-        $email = UtilsController::clean($_POST['email']);
-        $result = [];
-        if(!filter_var($email,FILTER_VALIDATE_EMAIL)) {
-            $result['error'] =  'incorrect_email';
 
-            echo json_encode($result);
-            return false;
-        }
 
         $exists = MainModel::checkExistsUser($email);
         return $exists;
-//        if($exists) {
-//            return false;
-//
-//        } else {
-//            return true;
-//        }
+
     }
 
 
     public function checkExistsUserForAjax() {
-        if($this->checkExistsUser()) {
-            $result['error'] =  'exists user';
-            echo json_encode($result);
+
+        if($this->checkExistsUser($_GET['email'])) {
+
+            echo 'false';
         } else {
-            $result['good'] =  'no exists';
-            echo json_encode($result);
+
+            echo 'true';
         }
     }
 

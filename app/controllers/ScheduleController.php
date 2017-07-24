@@ -103,7 +103,6 @@ class ScheduleController extends BaseController {
             return false;
         }
 
-
         $res   = OrganizerModel::addSchedule($_POST);
         if($res) {
 
