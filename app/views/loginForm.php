@@ -10,4 +10,4 @@
     </div>
     <button  type="submit" class="btn btn-lg btn-primary btn-block" id="submit_login">Submit</button>
 </form>
-<script src="/libs/js/main.js"></script>
+<script src="/js/main.js"></script>

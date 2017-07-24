@@ -1,7 +1,7 @@
-<form enctype="multipart/form-data" method="post" action="/auth/registration/" class="form-signin" id="new_customer">
+<form enctype="multipart/form-data" method="post" action="/auth/registration" class="form-signin" id="new_customer">
     <div class="form-group">
         <label for="email">Email</label>
-        <input type="text" class="form-control" id="email" name="email" required="required">
+        <input type="email" class="form-control" id="email" name="email" required="required">
     </div>
     <div class="form-group">
         <label for="password">Password</label>
@@ -14,4 +14,4 @@
 
     <button type="submit" class="btn btn-primary" id="submitRegistration">Submit</button>
 </form>
-<script src="/libs/js/registration.js"></script>
+<script src="/js/registration.js"></script>

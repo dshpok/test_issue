@@ -34,10 +34,10 @@ class BaseRoute {
         // added class of controllers
         $controllerName = ucfirst($controllerName) . 'Controller';
         $controllerFile = $controllerName . '.php';
-        $controllerPath = SITE_PATH ."/app/controllers/" . $controllerFile;
+        $controllerPath = SITE_PATH .'/../app/controllers/' . $controllerFile;
 
         if (file_exists($controllerPath)) {
-            require_once SITE_PATH . "/app/controllers/" . $controllerFile;
+            require_once SITE_PATH . '/../app/controllers/' . $controllerFile;
         }
         else {
             self::ErrorPage404();

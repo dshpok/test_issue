@@ -145,4 +145,4 @@
         </div>
     </div>
 </div>
-<script src="/libs/js/schedulers.js"></script>
+<script src="/js/schedulers.js"></script>

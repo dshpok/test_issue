@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/libs/bootstrap-3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/libs/bootstrap-3.3.5/css/signin.css">
-    <link rel="stylesheet" href="/libs/css/custom.css">
-    <script src="/libs/js/libs/jquery-2.1.1.js"></script>
-    <script src="/libs/js/libs/jQuery-validation/jquery.validate.js"></script>
-    <script src="/libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/js/libs/bootstrap-3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/js/libs/bootstrap-3.3.5/css/signin.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <script src="/js/libs/jquery-2.1.1.js"></script>
+    <script src="/js/libs/jQuery-validation/jquery.validate.js"></script>
+    <script src="/js/libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 
     <title></title>
 </head>
@@ -44,7 +44,7 @@
     </div>
 
 
-    <?php include 'app/views/'.$partialView; ?>
+    <?php include __DIR__.'/'.$partialView; ?>
 </div><!--/.container-->
 
 <hr>
