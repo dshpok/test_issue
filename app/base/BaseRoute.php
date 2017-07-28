@@ -1,6 +1,14 @@
 <?php
+namespace  App\base;
+
+use App\controllers\AuthController;
+use App\controllers\MainController;
+use App\controllers\ScheduleController;
+use App\controllers\UtilsController;
 
 class BaseRoute {
+
+    const CONTROLLER_NAMESPACE = 'App\controllers\\';
 
     public static function start() {
         // controller and action by default
@@ -34,29 +42,30 @@ class BaseRoute {
         // added class of controllers
         $controllerName = ucfirst($controllerName) . 'Controller';
         $controllerFile = $controllerName . '.php';
-        $controllerPath = SITE_PATH .'/../app/controllers/' . $controllerFile;
-
-        if (file_exists($controllerPath)) {
-            require_once SITE_PATH . '/../app/controllers/' . $controllerFile;
-        }
-        else {
+        $controllerPath = SITE_PATH .DS.'..'.DS.'app'.DS.'controllers'.DS. $controllerFile;
+        $controllerNameWithNamespace = self::CONTROLLER_NAMESPACE.$controllerName;
+        if (!file_exists($controllerPath)) {
             self::ErrorPage404();
+
         }
+
         // create controller
-        if(class_exists($controllerName)) {
-            $controller = new $controllerName;
+        if(class_exists($controllerNameWithNamespace)) {
+            $controller = new $controllerNameWithNamespace;
             $action     = $actionName;
+
+            if (method_exists($controller, $action)) {
+                //var_dump(method_exists($actionName));exit;
+                // call to controller action
+                $controller->$action();
+            }
+            else {
+                self::ErrorPage404();
+            }
         } else {
             self::ErrorPage404();
         }
 
-        if (method_exists($controller, $action)) {
-            // call to controller action
-            $controller->$action();
-        }
-        else {
-            self::ErrorPage404();
-        }
     }
 
 

@@ -1,5 +1,10 @@
 <?php
+namespace  App\controllers;
 
+use App\base\BaseController;
+use App\base\BaseView;
+use App\models\OrganizerModel;
+use App\models\MainModel;
 
 class AuthController extends BaseController {
 
@@ -85,6 +90,7 @@ class AuthController extends BaseController {
             return;
         }
         $info            = OrganizerModel::getAllUserSchedule($id);
+
         $userInfo['all'] = $info;
         BaseView::generate('userSchedulers.php', $userInfo);
     }

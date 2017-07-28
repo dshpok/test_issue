@@ -1,4 +1,8 @@
 <?php
+namespace  App\models;
+
+use App\base\BaseModel;
+
 
 class OrganizerModel {
 
@@ -28,12 +32,12 @@ class OrganizerModel {
         try {
             $dbh = BaseModel::getInstance();
             $stm = $dbh->prepare($sql);
-            $stm->bindParam(1, $id,PDO::PARAM_INT);
+            $stm->bindParam(1, $id,\PDO::PARAM_INT);
             $stm->execute();
 
-            return $stm->fetchall(PDO::FETCH_ASSOC);
+            return $stm->fetchall(\PDO::FETCH_ASSOC);
         }
-        catch(PDOException $e) {
+        catch(\PDOException $e) {
             echo 'ERROR SELECT USER' . $e->getMessage();
         }
     }
@@ -52,13 +56,13 @@ class OrganizerModel {
         try {
             $dbh = BaseModel::getInstance();
             $stm = $dbh->prepare($sql);
-            $stm->bindParam(1, $id,PDO::PARAM_INT);
-            $stm->bindParam(2, $userId,PDO::PARAM_INT);
+            $stm->bindParam(1, $id,\PDO::PARAM_INT);
+            $stm->bindParam(2, $userId,\PDO::PARAM_INT);
             $stm->execute();
 
-            return $stm->fetchall(PDO::FETCH_ASSOC);
+            return $stm->fetchall(\PDO::FETCH_ASSOC);
         }
-        catch(PDOException $e) {
+        catch(\PDOException $e) {
             echo 'ERROR SELECT SCHEDULER' . $e->getMessage();
         }
     }
@@ -68,7 +72,7 @@ class OrganizerModel {
         if(!$params) {
             return false;
         }
-//var_dump(($params));exit;
+
 
         $sql       = 'INSERT INTO ' . self::$_tableSchedulers .
           " (
@@ -86,14 +90,14 @@ class OrganizerModel {
             // $stm = BaseModel::getInstance()->insert($sql);
             $dbh = BaseModel::getInstance();
             $stm = $dbh->prepare($sql);
-            $stm->bindParam(1, $params['title'], PDO::PARAM_STR);
-            $stm->bindParam(2, $params['body'], PDO::PARAM_STR);
-            $stm->bindParam(3, $params['user_id'], PDO::PARAM_INT);
-            $stm->bindParam(4, $dateStart, PDO::PARAM_STR);
-            $stm->bindParam(5, $done, PDO::PARAM_INT);
+            $stm->bindParam(1, $params['title'], \PDO::PARAM_STR);
+            $stm->bindParam(2, $params['body'], \PDO::PARAM_STR);
+            $stm->bindParam(3, $params['user_id'], \PDO::PARAM_INT);
+            $stm->bindParam(4, $dateStart, \PDO::PARAM_STR);
+            $stm->bindParam(5, $done, \PDO::PARAM_INT);
             return $stm->execute();
 
-        } catch(PDOException $e) {
+        } catch(\PDOException $e) {
             echo 'ERROR TO ADD THE NEW SCHEDULE... SORRY, I am cry (((((' . $e->getMessage();
         }
     }
@@ -114,14 +118,14 @@ class OrganizerModel {
 
         try {
             $stm = BaseModel::getInstance()->prepare($sql);
-            $stm->bindParam(1, $params['title'],PDO::PARAM_STR);
-            $stm->bindParam(2, $params['body'],PDO::PARAM_STR);
-            $stm->bindParam(3, $dateStart,PDO::PARAM_STR);
+            $stm->bindParam(1, $params['title'],\PDO::PARAM_STR);
+            $stm->bindParam(2, $params['body'],\PDO::PARAM_STR);
+            $stm->bindParam(3, $dateStart,\PDO::PARAM_STR);
 
-            $stm->bindParam(4, $params['id'],PDO::PARAM_INT);
+            $stm->bindParam(4, $params['id'],\PDO::PARAM_INT);
             return $stm->execute();
         }
-        catch(PDOException $e) {
+        catch(\PDOException $e) {
             echo 'ERROR TO UPDATE OLD SCHEDULE... SORRY ((((('.$e->getMessage();
         }
     }
@@ -140,13 +144,13 @@ class OrganizerModel {
 
         try {
             $stm = BaseModel::getInstance()->prepare($sql);
-            $stm->bindParam(1, $id,PDO::PARAM_INT);
-            $stm->bindParam(2, $userId,PDO::PARAM_INT);
+            $stm->bindParam(1, $id,\PDO::PARAM_INT);
+            $stm->bindParam(2, $userId,\PDO::PARAM_INT);
 
             return $stm->execute();
 
         }
-        catch(PDOException $e) {
+        catch(\PDOException $e) {
             echo 'ERROR TO DELETE SCHEDULE... SORRY ((((('.$e->getMessage();
         }
     }
@@ -165,12 +169,12 @@ class OrganizerModel {
 
         try {
             $stm = BaseModel::getInstance()->prepare($sql);
-            $stm->bindParam(1, $id,PDO::PARAM_INT);
-            $stm->bindParam(2, $userId,PDO::PARAM_INT);
+            $stm->bindParam(1, $id,\PDO::PARAM_INT);
+            $stm->bindParam(2, $userId,\PDO::PARAM_INT);
 
            return $stm->execute();
         }
-        catch(PDOException $e) {
+        catch(\PDOException $e) {
             echo 'ERROR TO MAKE AS DONE SCHEDULE... SORRY ((((('.$e->getMessage();
         }
     }

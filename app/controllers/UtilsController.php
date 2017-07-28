@@ -1,4 +1,10 @@
 <?php
+
+namespace  App\controllers;
+
+use App\base\BaseController;
+
+
 class UtilsController extends BaseController {
 
 

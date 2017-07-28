@@ -1,5 +1,10 @@
 <?php
 
+namespace  App\controllers;
+
+use App\base\BaseController;
+
+
 class MainController extends BaseController {
 
     //start our application - check who came to us

@@ -1,3 +1,8 @@
+<?php
+
+use App\controllers\UtilsController;
+?>
+
 <div>
 
     <table id="schedulers_table" class="table">

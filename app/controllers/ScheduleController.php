@@ -1,4 +1,8 @@
 <?php
+namespace  App\controllers;
+
+use App\base\BaseController;
+use App\models\OrganizerModel;
 
 
 class ScheduleController extends BaseController {
@@ -20,7 +24,7 @@ class ScheduleController extends BaseController {
         $userId = $_COOKIE['isAuthUser'];
         $info = OrganizerModel::getOneSchedule($id, $userId);
 
-        $info = array_map('UtilsController::clean',$info[0]);
+        $info = array_map(__NAMESPACE__ .'\UtilsController::clean',$info[0]);
         echo json_encode($info);
     }
 

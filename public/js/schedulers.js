@@ -130,21 +130,23 @@ var Scheduler = function() {
                    id: scheduleId
                 },
                 success: function (res) {
+                    if(res) {
+                        var dateOld = new Date(res.date_start);
 
-                    var dateOld = new Date(res.date_start);
+                        //var dateSchedule = dateOld.getFullYear() + '-' + ("0" + (dateOld.getMonth() + 1)).slice(-2)
+                        //    + '-'  + dateOld.getDate() + ' ' + dateOld.getHours() + ':' + dateOld.getMinutes();
 
-                    //var dateSchedule = dateOld.getFullYear() + '-' + ("0" + (dateOld.getMonth() + 1)).slice(-2)
-                    //    + '-'  + dateOld.getDate() + ' ' + dateOld.getHours() + ':' + dateOld.getMinutes();
-
-                     var dateSchedule = new Date( dateOld.getTime() -  (dateOld.getTimezoneOffset() * 60000) ).toJSON().slice(0,16);
+                        var dateSchedule = new Date( dateOld.getTime() -  (dateOld.getTimezoneOffset() * 60000) ).toJSON().slice(0,16);
 
 
-                    self.body.modal.edit.input.title.val(res.title);
-                    self.body.modal.edit.input.body.val(res.body);
-                    self.body.modal.edit.input.date.val(dateSchedule);
-                    self.body.modal.edit.input.scheduleId.val(scheduleId);
-                    self.body.modal.edit.modal.modal('show');
-
+                        self.body.modal.edit.input.title.val(res.title);
+                        self.body.modal.edit.input.body.val(res.body);
+                        self.body.modal.edit.input.date.val(dateSchedule);
+                        self.body.modal.edit.input.scheduleId.val(scheduleId);
+                        self.body.modal.edit.modal.modal('show');
+                    } else {
+                        console.error('ERROR GETTING SCHEDULER', res);
+                    }
 
                 },
                 error: function (err) {
